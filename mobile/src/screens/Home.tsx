@@ -1,12 +1,64 @@
-import { View } from "react-native";
-import { HabitDay } from "../components/HabitDay";
-import { Header } from "../components/Header";
+import { Text, View, ScrollView, TouchableOpacity } from "react-native";
 
+import { HabitDay, DAY_SIZE } from "../components/HabitDay";
+import { Header } from "../components/Header";
+import { generateRangeDatesFromYearStart } from '../utils/generate-range-between-dates';
+
+const weekDays = ['D','S','T','Q','Q','S','S'];
+const datesFromYearStart = generateRangeDatesFromYearStart();
+const minimunSummaryDatesSize = 18 *5;
+const amountOfDayToFill = minimunSummaryDatesSize - datesFromYearStart.length;
 export function Home(){
   return (
     <View className="flex-1 bg-background px-8 pt-16">
       <Header/>
-      <HabitDay/>
+
+      <View className="flex-row mt-6 mb-2">
+        {
+          weekDays.map((weekDay,index)=>{
+            return (
+              <Text 
+                key={`${weekDay}-${index}`}
+                className="text-zinc-400 text-xl font-bold text-center mx-1"
+                style={{width:DAY_SIZE,height:DAY_SIZE}}
+              >
+                {weekDay}
+              </Text>
+            )
+          })
+        }
+      </View>
+      
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+      >
+        <View 
+          className="flex-row flex-wrap"
+        >
+          {
+            datesFromYearStart.map(date=>{
+              return (
+                <HabitDay
+                  key={date.toISOString()}
+                />
+              )
+            })
+          }
+          {
+            amountOfDayToFill > 0 && 
+            Array.from({length:amountOfDayToFill})
+            .map((_,index)=>{
+              return (
+                <View 
+                  key={index}
+                  className="text-zinc-900 rounded-lg border-2 m-1 border-zinc-800 opacity-40"
+                  style={{width:DAY_SIZE,height:DAY_SIZE}}
+                />
+              )
+            })
+          }
+        </View>
+      </ScrollView>
     </View>
   )
 }
