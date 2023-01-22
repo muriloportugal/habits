@@ -12,7 +12,24 @@ Neste projeto criamos uma aplicação completa (backend e frontend Web e Mobile)
   <img src="./assets/web.png">
 </div>
 
+
+## Mobile:
+<div align="center">
+  <img src="./assets/mobile.png">
+</div>
+
 ---
+
+## :checkered_flag: Como utilizar:
+Para iniciar os projetos server e web podemos utilizar o comando: 
+```bash
+ npm run dev 
+ ```
+Agora para o projeto mobile devemos utilizar:
+```bash
+ npx expo start 
+ ```
+ ---
 
 ## :robot: Tecnologias:
 - Fastify
